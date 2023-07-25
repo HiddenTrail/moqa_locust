@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  master:
+    build:
+      context: .
+    image: ${LOCUST_IMAGE_TAG:-moqa_locust:latest}
+    environment:
+      - PYTHONPATH=/opt/locust/tests/
+    ports:
+     - "8089:8089"
+    volumes:
+      - ./:/opt/locust/tests
+    command: locust -f ${LOCUSTFILE:-locustfiles/login_and_auth.py} --master -H ${BASE_URL:-http://localhost:8080} --loglevel ${LOG_LEVEL:-DEBUG} --logfile ${LOG_FILE_M:-testresults/master_logfile.log}
+
+  worker:
+    build:
+      context: .
+    image: ${LOCUST_IMAGE_TAG:-moqa_locust:latest}
+    environment:
+      - PYTHONPATH=/opt/locust/tests/
+      - TEST_ENV=${TEST_ENV:-test}
+    volumes:
+      - ./:/opt/locust/tests
+    command: locust -f ${LOCUSTFILE:-locustfiles/login_and_auth.py} --worker --master-host ${MASTER_HOST:-master} --loglevel ${LOG_LEVEL:-DEBUG} --logfile ${LOG_FILE_W:-testresults/worker_logfile.log}

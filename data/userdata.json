@@ -1,0 +1,12 @@
+{
+    "jsonplaceholder": {
+        "auth_url": "https://my-json-server.typicode.com",
+        "username": "teppo.testaaja",
+        "password": "V3ryS3cr3t!"
+    },
+    "test": {
+        "auth_url": "",
+        "username": "",
+        "password": ""
+    }
+}
