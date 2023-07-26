@@ -14,14 +14,12 @@ class ApiUser:
         json_response = response.json()
         try:
             self.access_token = json_response['access_token']
-            assert True
         except KeyError:
-            assert False, 'access_token not present in the response'
+            raise AssertionError('access_token not present in the response')
         try:
             self.token_type = json_response['token_type']
-            assert True
         except KeyError:
-            assert False, 'token_type not present in the response'
+            raise AssertionError('token_type not present in the response')
         self.session.headers['Authorization'] = f'{self.token_type} {self.access_token}'
 
     def login_user(self, auth_url):
@@ -31,10 +29,7 @@ class ApiUser:
         }
         response = self.session.post(f'{auth_url}/samuli-paasimaa-ht/fake_auth/login', json=payload)
         json_response = response.json()
-        try:
-            assert 'username' and 'password' in json_response
-        except AssertionError:
-            assert False, 'username and/or password not present in the response'
+        assert 'username' and 'password' in json_response, 'username and/or password not present in the response'
 
     def users_api(self):
         response = self.session.get('/users')
