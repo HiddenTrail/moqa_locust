@@ -12,7 +12,7 @@ Tests can be run by installing required software in your computer or using docke
 
 1. Install Python 3
 2. Install requirements with pip (preferably in venv)
-    - python3 -m pip install -r- requirements.txt
+    - python3 -m pip install -r requirements.txt
 
 ### Docker
 
