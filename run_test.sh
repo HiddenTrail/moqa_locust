@@ -36,6 +36,7 @@ function run_locust() {
     run_docker
   else
     echo "Running using local locust"
+    mkdir -p ${results_path}
     locust -f ${locust_file} -H ${base_url} \
         --loglevel ${log_level} --logfile ${results_path}/logfile.log
   fi
