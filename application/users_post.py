@@ -7,6 +7,7 @@ def get_random_user_id(user_list):
     logging.debug(f'Random user: {user}')
     return user['id']
 
+
 def get_random_post_id_for_user(user_id, posts_list):
     users_posts_list = []
     for post in posts_list:

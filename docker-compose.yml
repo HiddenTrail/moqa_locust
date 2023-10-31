@@ -19,7 +19,7 @@ services:
     image: ${LOCUST_IMAGE_TAG:-moqa_locust:latest}
     environment:
       - PYTHONPATH=/opt/locust/tests/
-      - TEST_ENV=${TEST_ENV:-test}
+      - TEST_ENV=${TEST_ENV:-jsonplaceholder}
     volumes:
       - ./:/opt/locust/tests
     command: locust -f ${LOCUSTFILE:-locustfiles/login_and_auth.py} --worker --master-host ${MASTER_HOST:-master} --loglevel ${LOG_LEVEL:-DEBUG} --logfile ${LOG_FILE_W:-testresults/worker_logfile.log}

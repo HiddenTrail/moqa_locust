@@ -1,5 +1,6 @@
 from locust.clients import HttpSession
 
+
 class ApiUser:
     def __init__(self, session: HttpSession, username, password, auth_url=None):
         self.session = session
@@ -10,7 +11,7 @@ class ApiUser:
             self.login_user(auth_url)
 
     def fetch_token(self, auth_url):
-        response = self.session.get(f'{auth_url}/samuli-paasimaa-ht/fake_auth/token')
+        response = self.session.get(f'{auth_url}/samuli-paasimaa-ht/fake_auth/token', name='/token')
         json_response = response.json()
         try:
             self.access_token = json_response['access_token']
@@ -27,7 +28,7 @@ class ApiUser:
             "username": self.username,
             "password": self.password
         }
-        response = self.session.post(f'{auth_url}/samuli-paasimaa-ht/fake_auth/login', json=payload)
+        response = self.session.post(f'{auth_url}/samuli-paasimaa-ht/fake_auth/login', json=payload, name='/login')
         json_response = response.json()
         assert 'username' and 'password' in json_response, 'username and/or password not present in the response'
 
